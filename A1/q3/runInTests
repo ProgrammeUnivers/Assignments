@@ -1,0 +1,21 @@
+#!/usr/bin/bash
+
+
+
+for file in $(cat "$2"); do
+ in_file="${file}.in"
+ out_file="${file}.out"
+
+ if [[ -f "$in_file" ]]; then
+  x=$("$1" < "$in_file")
+  y=$(cat "$out_file")
+
+  if [[ "$x" == "$y" ]]; then
+   echo "Test $file passed"
+  else
+   echo "Test $file failed"
+   echo "Expected output: "$y""
+   echo "Actual output: "$x""
+  fi
+ fi
+done

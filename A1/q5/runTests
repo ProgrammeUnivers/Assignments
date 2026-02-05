@@ -1,0 +1,28 @@
+#!/usr/bin/bash
+
+
+
+for file in $(cat "$2"); do
+ in_file="${file}.in"
+ out_file="${file}.out"
+ args_file="${file}.args"
+
+ if [[ -f "$in_file" ]]; then
+  if [[ -f "$args_file" ]]; then
+   args=$(cat "$args_file")
+   x=$($1 $args < "$in_file")
+  else
+   x=$("$1" < "$in_file")
+  fi
+
+  y=$(cat "$out_file")
+
+  if [[ "$x" == "$y" ]]; then
+   echo "Test $file passed"
+  else
+   echo "Test $file failed"
+   echo "Expected output: $y"
+   echo "Actual output: $x"
+  fi
+ fi
+done
