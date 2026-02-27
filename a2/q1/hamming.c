@@ -9,10 +9,8 @@ another base-10 natural number greater than one which represents the base to com
 previous two numbers in. 
 **/
 
-void hamming(int n) {
-    int a, b, base;
-    scanf("%d %d %d", &a, &b, &base);
-    
+void hamming(int a, int b, int base) {
+
     int distance = 0;
     
     while (a > 0 || b > 0) {
@@ -31,12 +29,10 @@ void hamming(int n) {
 } 
 
 int main() {
-    int n;
-    scanf("%d", &n);
+    int n, m, base;
+    scanf("%d %d %d", &n, &m, &base);
     
-    for (int i = 0; i < n; i++) {
-        hamming(n);
-    }
+    hamming(n, m , base);
     
     return 0;
 }
