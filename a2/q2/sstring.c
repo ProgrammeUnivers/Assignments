@@ -48,29 +48,68 @@ int main() {
                 sstring[index].length = 0;
                 scanf(" %c", &c);
                 if (c == '"') {
-                    while(getchar() != '"'){
-                    scanf(" %c", &c);
-                    append(&sstring[index], c);
+                    c = getchar();
+                    while(c != '"'){
+                        append(&sstring[index], c);
+                        c = getchar();
                     }
                 }
                 else {
-                    while(getchar() != '\n'){
-                    scanf(" %c", &c);
-                    append(&sstring[index], c);
+                    while(c != '\n' && c != EOF && c != ' ' && c != '\t' && c != '\r' && c != '\f' && c != '\v' && c != '\f'){
+                        append(&sstring[index], c);
+                        c = getchar();
                     }
 
                 }
             }
             break;
         case 'p':
-
-        
+            scanf(" %c", &c);
+            if (c >= 'a' && c <= 'd'){
+                int index = c - 'a';
+                for (int i = 0; i < sstring[index].length; i++){
+                    printf("%c", sstring[index].string[i]);
+                }
+                printf("\n");
             
+            }
+            break;
+
+        case 'd':
+            scanf(" %c", &c);
+            if (c >= 'a' && c <= 'd'){
+                int index = c - 'a';
+                printf("String: \" ");
+                for (int i = 0; i < sstring[index].length; i++){
+                    printf("%c", sstring[index].string[i]);
+                }
+                printf("\"\n");
+                printf("Length: %d\n", sstring[index].length);
+                printf("Capacity: %d\n", sstring[index].capacity);
+
+        case 'a':
+            scanf(" %c", &c);
+            if (c >= 'a' && c <= 'd'){
+                int index = c - 'a';
+                for (int i = 0; i < sstring[index].length; i++){
+                    printf("String: %c\n", sstring[index].string[i]);
+                }
+                printf("Length: %d\n", sstring[index].length);
+                printf("Capacity: %d\n", sstring[index].capacity);
+        
+        case 'c':
+                scanf(" %c", &c);
+                if (c >= 'a' && c <= 'd'){
+                int index = c - 'a';
+                sstring[index].length = 0;
+                scanf(" %c", &c);
+                if (c == '"') {
+                    c = getchar();
+                    while(c != '"'){
+                        append(&sstring[index], c);
+                        c = getchar();
+
         }
-    
     }
-
-
-
-
 }
+
