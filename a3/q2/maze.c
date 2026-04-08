@@ -97,7 +97,6 @@ struct Pos makeMove(struct Maze *m, char dir) {
     struct Pos p;
     p.x = m->playerX;
     p.y = m->playerY;
-    return p;
 
     int newX = m->playerX;
     int newY = m->playerY;
@@ -113,9 +112,18 @@ struct Pos makeMove(struct Maze *m, char dir) {
         return p; 
     }
 
-    char tile = m->grid[newY][newX];
 
-    if (tile == 'X') {
+    char tile = m->grid[newY][newX];
+   
+
+    if (tile == 'O'){
+        m->playerX = newX;
+        m->playerY = newY;
+        p.x = m->playerX;
+        p.y = m->playerY;
+        return p;
+    }
+    else if (tile == 'X') {
         p.x = m->playerX;
         p.y = m->playerY;
         return p;
@@ -130,14 +138,15 @@ struct Pos makeMove(struct Maze *m, char dir) {
     else if (tile >= '0' && tile <= '9') {
         for(int i = 0; i < m->rows; i++){
             for(int j = 0; j < m->cols; j++){
-                if(m->grid[i][j] == tile && newY != i && newX != j){
+                if(m->grid[i][j] == tile && (i != newY || j != newX)){
                     newY = i;
                     newX = j;
                     m->playerY = newY;
                     m->playerX = newX;
                 }
             }
-        }    
+        }
+        return p;    
     } 
     else if (tile == 'I') {
         int slideX = newX;
@@ -194,7 +203,13 @@ struct Pos makeMove(struct Maze *m, char dir) {
         p.x = m->playerX;
         p.y = m->playerY;
         return p;
+    } else {
+        m->playerX = newX;
+        m->playerY = newY;
     }
+    p.x = m->playerX;
+    p.y = m->playerY;
+    return p;
 }
 
 
