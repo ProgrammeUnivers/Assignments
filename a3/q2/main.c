@@ -69,6 +69,7 @@ int main() {
         break;
     }
   }
+ 
   if (win) {
     printf("Congrats you made it to the end of the maze!\n");
     printMaze(m);
