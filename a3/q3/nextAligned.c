@@ -1,7 +1,13 @@
 #include <stdio.h>
 
 void *nextAlignedAddress(void *faddr, size_t size) {
-  // TODO
+  size_t addr = (size_t) faddr;
+  printf("%ld\n", addr);
+  if (addr % size == 0) {
+    return faddr;
+  } else{
+    return (void *)(addr + (size - addr % size));
+  }
 }
 
 
