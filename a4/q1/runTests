@@ -1,0 +1,31 @@
+#!/usr/bin/bash
+
+while IFS= read -r file; do      
+    in_file="${file}.in"
+    in_file="${file}.in"
+    out_file="${file}.out"
+    args_file="${file}.args"
+
+    if [[ -f "$in_file" ]]; then
+        tmp_out=$(mktemp)
+
+        if [[ -f "$args_file" ]]; then
+            args=$(cat "$args_file")
+            "$1" $args < "$in_file" > "$tmp_out"
+        else
+            "$1" < "$in_file" > "$tmp_out"
+        fi
+
+        if diff -q "$tmp_out" "$out_file" > /dev/null 2>&1; then
+            echo "Test $file passed"
+        else
+            echo "Test $file failed"
+            echo "Expected output:"
+            cat "$out_file"
+            echo "Actual output:"
+            cat "$tmp_out"
+        fi
+
+        rm -f "$tmp_out"
+    fi
+done < "$2"
